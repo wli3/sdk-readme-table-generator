@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FsUnit.Xunit" Version="3.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.*" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.1.*" />
+    <PackageReference Include="nuget.versioning" Version="4.9.1" />
+    <PackageReference Include="xunit" Version="2.4.*" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="DomainTests.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TableGenerator\TableGenerator.fsproj" />
+  </ItemGroup>
+</Project>
