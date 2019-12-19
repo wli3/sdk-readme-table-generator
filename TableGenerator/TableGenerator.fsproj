@@ -6,6 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Shared.fs" />
+    <Compile Include="Table.fs" />
+    <Compile Include="Reference.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
