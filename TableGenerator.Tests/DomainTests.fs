@@ -13,21 +13,24 @@ open System
 let ``it can Shorten master branch Name``() =
     let branch =
         { GitBranchName = "master"
-          DisplayName = "Master<br>(5.0.x&nbsp;Runtime)" }
+          DisplayName = "Master<br>(5.0.x&nbsp;Runtime)"
+          AkaMsChannel = Some("net5/dev") }
     branchNameShorten branch |> should equal "master"
 
 [<Fact>]
 let ``it can Shorten releae branch Name``() =
     let branch =
         { GitBranchName = "release/3.1.1xx"
-          DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)" }
+          DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)"
+          AkaMsChannel = None}
     branchNameShorten branch |> should equal "3.1.1XX"
 
 [<Fact>]
 let ``it can get major and minor version of a branch``() =
     let branch =
         { GitBranchName = "release/3.1.1xx"
-          DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)" }
+          DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)"
+          AkaMsChannel = None}
     getMajorMinor branch
     |> should equal
            (MajorMinor
@@ -38,21 +41,24 @@ let ``it can get major and minor version of a branch``() =
 let ``it can get master version of a master branch``() =
     let branch =
         { GitBranchName = "master"
-          DisplayName = "Master<br>(5.0.x&nbsp;Runtime)" }
+          DisplayName = "Master<br>(5.0.x&nbsp;Runtime)"
+          AkaMsChannel = None}
     getMajorMinor branch |> should equal Master
 
 [<Fact>]
 let ``it can get bad branch version``() =
     let branch =
         { GitBranchName = "badbranch"
-          DisplayName = "" }
+          DisplayName = ""
+          AkaMsChannel = None}
     getMajorMinor branch |> should equal NoVersion
 
 [<Fact>]
 let ``it can format winx64Reference``() =
     let branch =
         { GitBranchName = "release/3.1.1xx"
-          DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)" }
+          DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)"
+          AkaMsChannel = None}
     (winX64ReferenceTemplate branch).Value
     |> should equal
            """[win-x64-badge-3.1.1XX]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/release/3.1.1xx/win_x64_Release_version_badge.svg
@@ -64,19 +70,26 @@ let ``it can format winx64Reference``() =
 
 let branches =
     [ { GitBranchName = "master"
-        DisplayName = "Master<br>(5.0.x&nbsp;Runtime)" }
+        DisplayName = "Master<br>(5.0.x&nbsp;Runtime)"
+        AkaMsChannel = None}
       { GitBranchName = "release/3.1.1xx"
-        DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)" }
+        DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)"
+        AkaMsChannel = None}
       { GitBranchName = "release/3.0.1xx"
-        DisplayName = "Release/3.0.1xx<br>(3.0.x Runtime)" }
+        DisplayName = "Release/3.0.1xx<br>(3.0.x Runtime)"
+        AkaMsChannel = None}
       { GitBranchName = "release/2.2.2xx"
-        DisplayName = "Release/2.2.2XX<br>(2.2.x Runtime)" }
+        DisplayName = "Release/2.2.2XX<br>(2.2.x Runtime)"
+        AkaMsChannel = None}
       { GitBranchName = "release/2.2.1xx"
-        DisplayName = "Release/2.2.1XX<br>(2.2.x Runtime)" }
+        DisplayName = "Release/2.2.1XX<br>(2.2.x Runtime)"
+        AkaMsChannel = None}
       { GitBranchName = "release/2.1.6xx"
-        DisplayName = "Release/2.1.6XX<br>(2.1.x Runtime)" }
+        DisplayName = "Release/2.1.6XX<br>(2.1.x Runtime)"
+        AkaMsChannel = None}
       { GitBranchName = "release/2.1.5xx"
-        DisplayName = "Release/2.1.5XX<br>(2.1.x Runtime)" } ]
+        DisplayName = "Release/2.1.5XX<br>(2.1.x Runtime)"
+        AkaMsChannel = None} ]
 
 [<Fact>]
 let ``it can generate WindowsX64Row``() =
@@ -119,23 +132,32 @@ let ``it can generate separator``() =
 let ``pinning tests for readme in 3.1.2xx``() =
     let branches =
         [ { GitBranchName = "master"
-            DisplayName = "Master<br>(5.0.x&nbsp;Runtime)" }
+            DisplayName = "Master<br>(5.0.x&nbsp;Runtime)"
+            AkaMsChannel = None}
           { GitBranchName = "release/3.1.1xx"
-            DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)" }
+            DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)"
+            AkaMsChannel = None}
           { GitBranchName = "release/3.0.1xx"
-            DisplayName = "Release/3.0.1xx<br>(3.0.x Runtime)" }
+            DisplayName = "Release/3.0.1xx<br>(3.0.x Runtime)"
+            AkaMsChannel = None}
           { GitBranchName = "release/2.2.3xx"
-            DisplayName = "Release/2.2.3XX<br>(2.2.x Runtime)" }
+            DisplayName = "Release/2.2.3XX<br>(2.2.x Runtime)"
+            AkaMsChannel = None}
           { GitBranchName = "release/2.2.2xx"
-            DisplayName = "Release/2.2.2XX<br>(2.2.x Runtime)" }
+            DisplayName = "Release/2.2.2XX<br>(2.2.x Runtime)"
+            AkaMsChannel = None}
           { GitBranchName = "release/2.2.1xx"
-            DisplayName = "Release/2.2.1XX<br>(2.2.x Runtime)" }
+            DisplayName = "Release/2.2.1XX<br>(2.2.x Runtime)"
+            AkaMsChannel = None}
           { GitBranchName = "release/2.1.7xx"
-            DisplayName = "Release/2.1.7XX<br>(2.1.7 Runtime)" }
+            DisplayName = "Release/2.1.7XX<br>(2.1.7 Runtime)"
+            AkaMsChannel = None}
           { GitBranchName = "release/2.1.6xx"
-            DisplayName = "Release/2.1.6XX<br>(2.1.6 Runtime)" }
+            DisplayName = "Release/2.1.6XX<br>(2.1.6 Runtime)"
+            AkaMsChannel = None}
           { GitBranchName = "release/2.1.5xx"
-            DisplayName = "Release/2.1.5XX<br>(2.1.5 Runtime)" } ]
+            DisplayName = "Release/2.1.5XX<br>(2.1.5 Runtime)"
+            AkaMsChannel = None} ]
 
     wholeTable branches
     |> should equal

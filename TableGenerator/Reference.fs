@@ -3,13 +3,32 @@
 open System
 open TableGenerator.Shared
 
-let referenceTemplate: ReferenceTemplate =
-    """[{0}-badge-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/{3}_Release_version_badge.svg
+// https://aka.ms/dotnet/net5/dev/Sdk/dotnet-sdk-win-x64.exe
+
+// https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-sdk-latest-win-x64.exe
+// https://aka.ms/                         dotnet/net5/preview2/Sdk/dotnet-sdk-win-x64.exe
+
+// https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/win_x64_Release_version_badge.svg
+// https://aka.ms/                         dotnet/net5/preview2/Sdk/win_x64_Release_version_badge.svg
+
+//  https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/latest.version
+//  https://aka.ms/dotnet/net5/preview2/Sdk/latest.version
+
+let referenceTemplate: ReferenceTemplate = {
+    LegacyTemplate = """[{0}-badge-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/{3}_Release_version_badge.svg
 [{0}-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
 [{0}-installer-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.exe
 [{0}-installer-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.exe.sha
 [{0}-zip-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.zip
 [{0}-zip-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.zip.sha"""
+
+    AkaMSTemplate = """[{0}-badge-{1}]: https://aka.ms/dotnet/{2}/Sdk/{3}_Release_version_badge.svg
+[{0}-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
+[{0}-installer-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.exe
+[{0}-installer-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.exe.sha
+[{0}-zip-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.zip
+[{0}-zip-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.zip.sha"""
+}
 
 let targzReferenceTemplate: ReferenceTemplate =
     """[{0}-badge-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/{3}_Release_version_badge.svg
