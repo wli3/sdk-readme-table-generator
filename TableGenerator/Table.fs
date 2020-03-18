@@ -69,6 +69,17 @@ let windowsArmRow branches =
         | _ -> String.Format(tableTemplate, branchNameShorten branch)
     formRow "**Windows arm**" tableTemplateForThisArch branches
 
+let windowsArm64Row branches =
+    let tableTemplate =
+        "[![][win-arm-64-badge-{0}]][win-arm-64-version-{0}]<br>[zip][win-arm-64-zip-{0}]"
+
+    let tableTemplateForThisArch branch =
+        match getMajorMinor branch with
+        | NoVersion -> notAvailable
+        | MajorMinor { Major = major; Minor = minor } when major <= 3 -> notAvailable
+        | _ -> String.Format(tableTemplate, branchNameShorten branch)
+    formRow "**Windows arm64**" tableTemplateForThisArch branches
+
 let freebsdX64Row branches =
     let tableTemplate =
         "[![][freebsd-x64-badge-{0}]][freebsd-x64-version-{0}]<br>[tar.gz][freebsd-x64-zip-{0}] - [Checksum][freebsd-x64-zip-checksum-{0}] "
@@ -100,6 +111,7 @@ let rows =
       rhel6Row
       linuxMuslRow
       windowsArmRow
+      windowsArm64Row
       freebsdX64Row
       ConstituentRepoShas ]
 
