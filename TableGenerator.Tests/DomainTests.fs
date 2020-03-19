@@ -103,6 +103,13 @@ let ``it can generate windowsArm``() =
            "| **Windows arm** | [![][win-arm-badge-master]][win-arm-version-master]<br>[zip][win-arm-zip-master] - [Checksum][win-arm-zip-checksum-master] | [![][win-arm-badge-3.1.1XX]][win-arm-version-3.1.1XX]<br>[zip][win-arm-zip-3.1.1XX] - [Checksum][win-arm-zip-checksum-3.1.1XX] | [![][win-arm-badge-3.0.1XX]][win-arm-version-3.0.1XX]<br>[zip][win-arm-zip-3.0.1XX] - [Checksum][win-arm-zip-checksum-3.0.1XX] | [![][win-arm-badge-2.2.2XX]][win-arm-version-2.2.2XX]<br>[zip][win-arm-zip-2.2.2XX] - [Checksum][win-arm-zip-checksum-2.2.2XX] | [![][win-arm-badge-2.2.1XX]][win-arm-version-2.2.1XX]<br>[zip][win-arm-zip-2.2.1XX] - [Checksum][win-arm-zip-checksum-2.2.1XX] | **N/A** | **N/A** |"
 
 [<Fact>]
+let ``it can generate windowsArm64``() =
+    windowsArm64Row branches
+    |> should equal
+           "| **Windows arm64** | [![][win-arm-64-badge-master]][win-arm-64-version-master]<br>[zip][win-arm-64-zip-master] | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** |"
+
+
+[<Fact>]
 let ``it can generate titleRow``() =
     titleRow branches
     |> should equal
@@ -150,6 +157,7 @@ let ``pinning tests for readme in 3.1.2xx``() =
 | **RHEL 6** | [![][rhel-6-badge-master]][rhel-6-version-master]<br>[tar.gz][rhel-6-targz-master] - [Checksum][rhel-6-targz-checksum-master] | [![][rhel-6-badge-3.1.1XX]][rhel-6-version-3.1.1XX]<br>[tar.gz][rhel-6-targz-3.1.1XX] - [Checksum][rhel-6-targz-checksum-3.1.1XX] | [![][rhel-6-badge-3.0.1XX]][rhel-6-version-3.0.1XX]<br>[tar.gz][rhel-6-targz-3.0.1XX] - [Checksum][rhel-6-targz-checksum-3.0.1XX] | [![][rhel-6-badge-2.2.3XX]][rhel-6-version-2.2.3XX]<br>[tar.gz][rhel-6-targz-2.2.3XX] - [Checksum][rhel-6-targz-checksum-2.2.3XX] | [![][rhel-6-badge-2.2.2XX]][rhel-6-version-2.2.2XX]<br>[tar.gz][rhel-6-targz-2.2.2XX] - [Checksum][rhel-6-targz-checksum-2.2.2XX] | [![][rhel-6-badge-2.2.1XX]][rhel-6-version-2.2.1XX]<br>[tar.gz][rhel-6-targz-2.2.1XX] - [Checksum][rhel-6-targz-checksum-2.2.1XX] | [![][rhel-6-badge-2.1.7XX]][rhel-6-version-2.1.7XX]<br>[tar.gz][rhel-6-targz-2.1.7XX] - [Checksum][rhel-6-targz-checksum-2.1.7XX] | [![][rhel-6-badge-2.1.6XX]][rhel-6-version-2.1.6XX]<br>[tar.gz][rhel-6-targz-2.1.6XX] - [Checksum][rhel-6-targz-checksum-2.1.6XX] | [![][rhel-6-badge-2.1.5XX]][rhel-6-version-2.1.5XX]<br>[tar.gz][rhel-6-targz-2.1.5XX] - [Checksum][rhel-6-targz-checksum-2.1.5XX] |
 | **Linux-musl** | [![][linux-musl-badge-master]][linux-musl-version-master]<br>[tar.gz][linux-musl-targz-master] - [Checksum][linux-musl-targz-checksum-master] | [![][linux-musl-badge-3.1.1XX]][linux-musl-version-3.1.1XX]<br>[tar.gz][linux-musl-targz-3.1.1XX] - [Checksum][linux-musl-targz-checksum-3.1.1XX] | [![][linux-musl-badge-3.0.1XX]][linux-musl-version-3.0.1XX]<br>[tar.gz][linux-musl-targz-3.0.1XX] - [Checksum][linux-musl-targz-checksum-3.0.1XX] | [![][linux-musl-badge-2.2.3XX]][linux-musl-version-2.2.3XX]<br>[tar.gz][linux-musl-targz-2.2.3XX] - [Checksum][linux-musl-targz-checksum-2.2.3XX] | [![][linux-musl-badge-2.2.2XX]][linux-musl-version-2.2.2XX]<br>[tar.gz][linux-musl-targz-2.2.2XX] - [Checksum][linux-musl-targz-checksum-2.2.2XX] | [![][linux-musl-badge-2.2.1XX]][linux-musl-version-2.2.1XX]<br>[tar.gz][linux-musl-targz-2.2.1XX] - [Checksum][linux-musl-targz-checksum-2.2.1XX] | [![][linux-musl-badge-2.1.7XX]][linux-musl-version-2.1.7XX]<br>[tar.gz][linux-musl-targz-2.1.7XX] - [Checksum][linux-musl-targz-checksum-2.1.7XX] | [![][linux-musl-badge-2.1.6XX]][linux-musl-version-2.1.6XX]<br>[tar.gz][linux-musl-targz-2.1.6XX] - [Checksum][linux-musl-targz-checksum-2.1.6XX] | [![][linux-musl-badge-2.1.5XX]][linux-musl-version-2.1.5XX]<br>[tar.gz][linux-musl-targz-2.1.5XX] - [Checksum][linux-musl-targz-checksum-2.1.5XX] |
 | **Windows arm** | [![][win-arm-badge-master]][win-arm-version-master]<br>[zip][win-arm-zip-master] - [Checksum][win-arm-zip-checksum-master] | [![][win-arm-badge-3.1.1XX]][win-arm-version-3.1.1XX]<br>[zip][win-arm-zip-3.1.1XX] - [Checksum][win-arm-zip-checksum-3.1.1XX] | [![][win-arm-badge-3.0.1XX]][win-arm-version-3.0.1XX]<br>[zip][win-arm-zip-3.0.1XX] - [Checksum][win-arm-zip-checksum-3.0.1XX] | [![][win-arm-badge-2.2.3XX]][win-arm-version-2.2.3XX]<br>[zip][win-arm-zip-2.2.3XX] - [Checksum][win-arm-zip-checksum-2.2.3XX] | [![][win-arm-badge-2.2.2XX]][win-arm-version-2.2.2XX]<br>[zip][win-arm-zip-2.2.2XX] - [Checksum][win-arm-zip-checksum-2.2.2XX] | [![][win-arm-badge-2.2.1XX]][win-arm-version-2.2.1XX]<br>[zip][win-arm-zip-2.2.1XX] - [Checksum][win-arm-zip-checksum-2.2.1XX] | **N/A** | **N/A** | **N/A** |
+| **Windows arm64** | [![][win-arm-64-badge-master]][win-arm-64-version-master]<br>[zip][win-arm-64-zip-master] | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** |
 | **FreeBSD x64** | [![][freebsd-x64-badge-master]][freebsd-x64-version-master]<br>[tar.gz][freebsd-x64-zip-master] - [Checksum][freebsd-x64-zip-checksum-master]  | [![][freebsd-x64-badge-3.1.1XX]][freebsd-x64-version-3.1.1XX]<br>[tar.gz][freebsd-x64-zip-3.1.1XX] - [Checksum][freebsd-x64-zip-checksum-3.1.1XX]  | [![][freebsd-x64-badge-3.0.1XX]][freebsd-x64-version-3.0.1XX]<br>[tar.gz][freebsd-x64-zip-3.0.1XX] - [Checksum][freebsd-x64-zip-checksum-3.0.1XX]  | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** |
 | **Constituent Repo Shas** | **N/A** | **N/A** | [Git SHAs][sdk-shas-2.2.1XX] | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** |
 
@@ -639,6 +647,10 @@ Reference notes:
 [win-arm-version-2.2.1XX]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/release/2.2.1xx/latest.version
 [win-arm-zip-2.2.1XX]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/release/2.2.1xx/dotnet-sdk-latest-win-arm.zip
 [win-arm-zip-checksum-2.2.1XX]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/release/2.2.1xx/dotnet-sdk-latest-win-arm.zip.sha
+
+[win-arm-64-badge-master]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/win_arm64_Release_version_badge.svg
+[win-arm-64-version-master]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/latest.version
+[win-arm-64-zip-master]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-sdk-latest-win-arm64.zip
 
 [freebsd-x64-badge-master]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/freebsd_x64_Release_version_badge.svg
 [freebsd-x64-version-master]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/latest.version

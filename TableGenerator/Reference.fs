@@ -86,6 +86,17 @@ let winArmMuslReferenceTemplate branch =
 [win-arm-zip-checksum-{0}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{1}/dotnet-sdk-latest-win-arm.zip.sha"""
         Some(String.Format(template, branchNameShorten branch, branch.GitBranchName))
 
+let winArm64ReferenceTemplate branch =
+    match getMajorMinor branch with
+    | NoVersion -> None
+    | MajorMinor { Major = major; Minor = minor } when major <= 3 -> None
+    | _ ->
+        let template =
+            """[win-arm-64-badge-{0}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{1}/win_arm64_Release_version_badge.svg
+[win-arm-64-version-{0}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{1}/latest.version
+[win-arm-64-zip-{0}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{1}/dotnet-sdk-latest-win-arm64.zip"""
+        Some(String.Format(template, branchNameShorten branch, branch.GitBranchName))
+
 let freebsdReferenceTemplate branch =
     match getMajorMinor branch with
     | NoVersion -> None
@@ -108,6 +119,7 @@ let templates =
       rhel6ReferenceTemplate
       linuxMuslReferenceTemplate
       winArmMuslReferenceTemplate
+      winArm64ReferenceTemplate
       freebsdReferenceTemplate ]
 
 let referenceList branches =
