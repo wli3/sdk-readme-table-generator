@@ -113,15 +113,15 @@ let linuxMuslReferenceTemplate: ReferenceTemplate = {
 }
 
 let winMuslReferenceTemplate: ReferenceTemplate = {
-    LegacyTemplate = """[win-arm-badge-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/{3}_Release_version_badge.svg
-[win-arm-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
-[win-arm-zip-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.zip
-[win-arm-zip-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.zip.sha"""
+    LegacyTemplate = """[{0}-badge-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/{3}_Release_version_badge.svg
+[{0}-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
+[{0}-zip-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.zip
+[{0}-zip-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.zip.sha"""
 
-    AkaMSTemplate = """[win-arm-badge-{1}]: https://aka.ms/dotnet/{4}/Sdk/{3}_Release_version_badge.svg
-[win-arm-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
-[win-arm-zip-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.zip
-[win-arm-zip-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.zip.sha"""
+    AkaMSTemplate = """[{0}-badge-{1}]: https://aka.ms/dotnet/{4}/Sdk/{3}_Release_version_badge.svg
+[{0}-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
+[{0}-zip-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.zip
+[{0}-zip-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.zip.sha"""
 }
 
 let freebsdReferenceTemplate: ReferenceTemplate = {
@@ -173,6 +173,12 @@ let winArmMuslReferenceTemplate branch =
     | MajorMinor { Major = major; Minor = minor } when major <= 2 && minor <= 1 -> None
     | _ -> formatTemplate "win-arm" winMuslReferenceTemplate branch
 
+let winArm64MuslReferenceTemplate branch =
+    match getMajorMinor branch with
+    | NoVersion -> None
+    | MajorMinor { Major = major; Minor = minor } when major <= 2 && minor <= 1 -> None
+    | _ -> formatTemplate "win-arm64" winMuslReferenceTemplate branch
+
 let freebsdx64ReferenceTemplate branch =
     match getMajorMinor branch with
     | NoVersion -> None
@@ -189,6 +195,7 @@ let templates =
       rhel6x64ReferenceTemplate
       linuxMuslx64ReferenceTemplate
       winArmMuslReferenceTemplate
+      winArm64MuslReferenceTemplate
       freebsdx64ReferenceTemplate ]
 
 let referenceList branches =
