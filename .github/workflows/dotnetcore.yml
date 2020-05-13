@@ -24,4 +24,4 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Run and see the result
-      run: dotnet run --no-build --project .\TableGenerator\TableGenerator.fsproj
+      run: dotnet run --no-build --project ./TableGenerator/TableGenerator.fsproj
