@@ -1,12 +1,16 @@
 ﻿module TableGenerator.Shared
 
+open NuGet.Versioning
 open System
 
 type Branch =
     { GitBranchName: string
-      DisplayName: string }
+      DisplayName: string
+      AkaMsChannel: string option }
 
-type ReferenceTemplate = string
+type ReferenceTemplate =
+    { AkaMSTemplate: string
+      LegacyTemplate: string }
 
 let branchNameShorten (branch: Branch): string =
     branch.GitBranchName.Substring(branch.GitBranchName.IndexOf('/') + 1).Replace("xx", "XX")
@@ -27,7 +31,7 @@ let getMajorMinor (branch: Branch): BranchMajorMinorVersionOrMaster =
         match branch.GitBranchName.IndexOf('/') with
         | index when index < 0 -> NoVersion
         | _ ->
-            match Version.TryParse
+            match NuGetVersion.TryParseStrict
                       (branch.GitBranchName.Substring(branch.GitBranchName.IndexOf('/') + 1).Replace("xx", "99")) with
             | true, version ->
                 MajorMinor
