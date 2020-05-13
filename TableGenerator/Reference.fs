@@ -113,18 +113,6 @@ let winMuslReferenceTemplate: ReferenceTemplate = {
 [{0}-zip-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.zip.sha"""
 }
 
-let freebsdReferenceTemplate: ReferenceTemplate = {
-    LegacyTemplate = """[{0}-badge-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/{3}_Release_version_badge.svg
-[{0}-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
-[{0}-zip-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.tar.gz
-[{0}-zip-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.tar.gz.sha"""
-
-    AkaMSTemplate = """[freebsd-x64-badge-{1}]: https://aka.ms/dotnet/{4}/Sdk/{3}_Release_version_badge.svg
-[{0}-version-{1}]: https://aka.ms/dotnet/{4}/Sdk/productCommit-{0}.txt
-[{0}-zip-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.tar.gz
-[{0}-zip-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.tar.gz.sha"""
-}
-
 let formatTemplate (platform: String) (template: ReferenceTemplate) (branch: Branch): Option<string> =
     if branch.AkaMsChannel <> None then
         Some (String.Format(template.AkaMSTemplate, 
@@ -168,12 +156,6 @@ let winArm64MuslReferenceTemplate branch =
     | MajorMinor { Major = major; Minor = minor } when major <= 2 && minor <= 1 -> None
     | _ -> formatTemplate "win-arm64" winMuslReferenceTemplate branch
 
-let freebsdx64ReferenceTemplate branch =
-    match getMajorMinor branch with
-    | NoVersion -> None
-    | MajorMinor { Major = major; Minor = _minor } when major <= 2 -> None
-    | _ -> formatTemplate "freebsd-x64" freebsdReferenceTemplate branch
-
 let templates =
     [ winX64ReferenceTemplate
       winX86ReferenceTemplate
@@ -184,8 +166,7 @@ let templates =
       rhel6x64ReferenceTemplate
       linuxMuslx64ReferenceTemplate
       winArmMuslReferenceTemplate
-      winArm64MuslReferenceTemplate
-      freebsdx64ReferenceTemplate ]
+      winArm64MuslReferenceTemplate ]
 
 let referenceList branches =
     String.Join
