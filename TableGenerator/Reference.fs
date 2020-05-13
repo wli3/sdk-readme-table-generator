@@ -153,7 +153,7 @@ let winArmMuslReferenceTemplate branch =
 let winArm64MuslReferenceTemplate branch =
     match getMajorMinor branch with
     | NoVersion -> None
-    | MajorMinor { Major = major; Minor = minor } when major <= 2 && minor <= 1 -> None
+    | MajorMinor { Major = major; Minor = minor } when major < 5 -> None
     | _ -> formatTemplate "win-arm64" winMuslReferenceTemplate branch
 
 let templates =
