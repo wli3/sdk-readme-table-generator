@@ -68,6 +68,23 @@ let ``it can format winx64Reference``() =
 [win-x64-zip-3.1.1XX]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/release/3.1.1xx/dotnet-sdk-latest-win-x64.zip
 [win-x64-zip-checksum-3.1.1XX]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/release/3.1.1xx/dotnet-sdk-latest-win-x64.zip.sha"""
 
+[<Fact>]
+let ``it can format ReferenceWithAkaMslink``() =
+    let branch =
+        { GitBranchName = "release/5.0.1xx-preview2"
+          DisplayName = "5.0.100 Preview 2<br>(5.0 Runtime)"
+          AkaMsChannel = Some("net5/preview2") }
+
+    (formatTemplate "win-x64" referenceTemplate branch).Value
+    |> should equal
+           """[win-x64-badge-5.0.1XX-preview2]: https://aka.ms/dotnet/net5/preview2/Sdk/win_x64_Release_version_badge.svg
+[win-x64-version-5.0.1XX-preview2]: https://aka.ms/dotnet/net5/preview2/Sdk/productCommit-win-x64.txt
+[win-x64-installer-5.0.1XX-preview2]: https://aka.ms/dotnet/net5/preview2/Sdk/dotnet-sdk-win-x64.exe
+[win-x64-installer-checksum-5.0.1XX-preview2]: https://aka.ms/dotnet/net5/preview2/Sdk/dotnet-sdk-win-x64.exe.sha
+[win-x64-zip-5.0.1XX-preview2]: https://aka.ms/dotnet/net5/preview2/Sdk/dotnet-sdk-win-x64.zip
+[win-x64-zip-checksum-5.0.1XX-preview2]: https://aka.ms/dotnet/net5/preview2/Sdk/dotnet-sdk-win-x64.zip.sha"""
+
+
 let branches =
     [ { GitBranchName = "master"
         DisplayName = "Master<br>(5.0.x&nbsp;Runtime)"
