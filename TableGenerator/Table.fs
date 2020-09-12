@@ -51,7 +51,12 @@ let linuxArmX64Row branches =
     formRow "**Linux arm64**" tableTemplateForThisArch branches
 
 let rhel6Row branches =
-    let tableTemplateForThisArch branch = String.Format(linuxArmTableTemplate, "rhel-6", branchNameShorten branch)
+    let tableTemplateForThisArch branch =
+        match getMajorMinor branch with
+        | NoVersion -> notAvailable
+        | Master -> notAvailable
+        | MajorMinor { Major = major; Minor = minor } when major >= 5 -> notAvailable
+        | _ -> String.Format(linuxArmTableTemplate, "rhel-6", branchNameShorten branch)
     formRow "**RHEL 6**" tableTemplateForThisArch branches
 
 let linuxMuslRow branches =
@@ -84,10 +89,6 @@ let titleRow = formRow "Platform" (fun (b: Branch) -> b.DisplayName)
 
 let separator = formRow ":---------" (fun _ -> ":----------:")
 
-let ConstituentRepoShas =
-    formRow "**Constituent Repo Shas**"
-        (fun (b: Branch) -> if b.GitBranchName = "release/3.0.1xx" then "[Git SHAs][sdk-shas-2.2.1XX]" else notAvailable)
-
 let rows =
     [ titleRow
       separator
@@ -100,7 +101,6 @@ let rows =
       rhel6Row
       linuxMuslRow
       windowsArmRow
-      windowsArm64Row
-      ConstituentRepoShas ]
+      windowsArm64Row ]
 
 let table branches = String.Join(Environment.NewLine, rows |> List.map (fun row -> row branches))
