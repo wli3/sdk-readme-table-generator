@@ -7,39 +7,21 @@ open TableGenerator.Table
 
 let inputBranches =
         [ { GitBranchName = "master"
-            DisplayName = "Master<br>(5.0.x&nbsp;Runtime)"
-            AkaMsChannel = Some("net5/dev") }
-          { GitBranchName = "release/5.0.1xx-preview5"
-            DisplayName = "5.0.100 Preview 5<br>(5.0 Runtime)"
-            AkaMsChannel = Some("net5/preview5") }
-          { GitBranchName = "release/5.0.1xx-preview4"
-            DisplayName = "5.0.100 Preview 4<br>(5.0 Runtime)"
-            AkaMsChannel = Some("net5/preview4") }
+            DisplayName = "Master<br>(6.0.x&nbsp;Runtime)"
+            AkaMsChannel = Some("net6/dev") }
+          { GitBranchName = "release/5.0.1xx-rc2"
+            DisplayName = "5.0.100 RC2<br>(5.0 Runtime)"
+            AkaMsChannel = Some("net5/rc2") }
+          { GitBranchName = "release/5.0.1xx"
+            DisplayName = "5.0.100 RC1<br>(5.0 Runtime)"
+            AkaMsChannel = Some("net5/RC1") }
           { GitBranchName = "release/3.1.4xx"
             DisplayName = "Release/3.1.4XX<br>(3.1.x Runtime)"
             AkaMsChannel = None }
-          { GitBranchName = "release/3.1.3xx"
-            DisplayName = "Release/3.1.3XX<br>(3.1.x Runtime)"
-            AkaMsChannel = None }
-          { GitBranchName = "release/3.1.2xx"
-            DisplayName = "Release/3.1.2XX<br>(3.1.x Runtime)"
-            AkaMsChannel = None }
           { GitBranchName = "release/3.1.1xx"
             DisplayName = "Release/3.1.1XX<br>(3.1.x Runtime)"
-            AkaMsChannel = None }
-          { GitBranchName = "release/3.0.1xx"
-            DisplayName = "Release/3.0.1xx<br>(3.0.x Runtime)"
-            AkaMsChannel = None } ]
-let inputBranches2x =
-    [ { GitBranchName = "release/2.1.8xx"
-        DisplayName = "Release/2.1.8XX<br>(2.1.x Runtime)"
-        AkaMsChannel = None }
-      { GitBranchName = "release/2.1.6xx"
-        DisplayName = "Release/2.1.6XX<br>(2.1.6 Runtime)"
-        AkaMsChannel = None }
-      { GitBranchName = "release/2.1.5xx"
-        DisplayName = "Release/2.1.5XX<br>(2.1.5 Runtime)"
-        AkaMsChannel = None } ]
+            AkaMsChannel = None }]
+
 
 let referentNotes = """Reference notes:
 > **1**: Our Debian packages are put together slightly differently than the other OS specific installers. Instead of combining everything, we have separate component packages that depend on each other. If you're installing the SDK from the .deb file (via dpkg or similar), then you'll need to install the corresponding dependencies first:
