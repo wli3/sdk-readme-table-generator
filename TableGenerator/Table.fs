@@ -70,7 +70,8 @@ let windowsArmRow branches =
     let tableTemplateForThisArch branch =
         match getMajorMinor branch with
         | NoVersion -> notAvailable
-        | MajorMinor { Major = major; Minor = minor } when  ( major <= 2 && minor <= 1) -> notAvailable
+        | Master -> notAvailable
+        | MajorMinor { Major = major; Minor = minor } when  ( major >= 5) -> notAvailable
         | _ -> String.Format(tableTemplate, branchNameShorten branch)
     formRow "**Windows arm**" tableTemplateForThisArch branches
 
