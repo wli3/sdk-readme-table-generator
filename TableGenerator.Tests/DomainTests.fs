@@ -35,7 +35,8 @@ let ``it can get major and minor version of a branch``() =
     |> should equal
            (MajorMinor
                ({ Major = 3
-                  Minor = 1 }))
+                  Minor = 1
+                  Release = ""}))
            
 [<Fact>]
 let ``it can get major and minor version of a preview branch``() =
@@ -47,7 +48,8 @@ let ``it can get major and minor version of a preview branch``() =
     |> should equal
            (MajorMinor
                ({ Major = 5
-                  Minor = 0 }))
+                  Minor = 0
+                  Release = "preview2"}))
 
 [<Fact>]
 let ``it can get master version of a master branch``() =
@@ -611,16 +613,22 @@ Reference notes:
 
 [win-arm64-badge-master]: https://aka.ms/dotnet/net5/dev/Sdk/win_arm64_Release_version_badge.svg
 [win-arm64-version-master]: https://aka.ms/dotnet/net5/dev/Sdk/productCommit-win-arm64.txt
+[win-arm64-installer-master]: https://aka.ms/dotnet/net5/dev/Sdk/dotnet-sdk-win-arm64.exe
+[win-arm64-installer-checksum-master]: https://aka.ms/dotnet/net5/dev/Sdk/dotnet-sdk-win-arm64.exe.sha
 [win-arm64-zip-master]: https://aka.ms/dotnet/net5/dev/Sdk/dotnet-sdk-win-arm64.zip
 [win-arm64-zip-checksum-master]: https://aka.ms/dotnet/net5/dev/Sdk/dotnet-sdk-win-arm64.zip.sha
 
 [win-arm64-badge-5.0.1XX-preview4]: https://aka.ms/dotnet/net5/preview4/Sdk/win_arm64_Release_version_badge.svg
 [win-arm64-version-5.0.1XX-preview4]: https://aka.ms/dotnet/net5/preview4/Sdk/productCommit-win-arm64.txt
+[win-arm64-installer-5.0.1XX-preview4]: https://aka.ms/dotnet/net5/preview4/Sdk/dotnet-sdk-win-arm64.exe
+[win-arm64-installer-checksum-5.0.1XX-preview4]: https://aka.ms/dotnet/net5/preview4/Sdk/dotnet-sdk-win-arm64.exe.sha
 [win-arm64-zip-5.0.1XX-preview4]: https://aka.ms/dotnet/net5/preview4/Sdk/dotnet-sdk-win-arm64.zip
 [win-arm64-zip-checksum-5.0.1XX-preview4]: https://aka.ms/dotnet/net5/preview4/Sdk/dotnet-sdk-win-arm64.zip.sha
 
 [win-arm64-badge-5.0.1XX-preview3]: https://aka.ms/dotnet/net5/preview3/Sdk/win_arm64_Release_version_badge.svg
 [win-arm64-version-5.0.1XX-preview3]: https://aka.ms/dotnet/net5/preview3/Sdk/productCommit-win-arm64.txt
+[win-arm64-installer-5.0.1XX-preview3]: https://aka.ms/dotnet/net5/preview3/Sdk/dotnet-sdk-win-arm64.exe
+[win-arm64-installer-checksum-5.0.1XX-preview3]: https://aka.ms/dotnet/net5/preview3/Sdk/dotnet-sdk-win-arm64.exe.sha
 [win-arm64-zip-5.0.1XX-preview3]: https://aka.ms/dotnet/net5/preview3/Sdk/dotnet-sdk-win-arm64.zip
 [win-arm64-zip-checksum-5.0.1XX-preview3]: https://aka.ms/dotnet/net5/preview3/Sdk/dotnet-sdk-win-arm64.zip.sha
 
