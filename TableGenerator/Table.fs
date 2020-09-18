@@ -79,10 +79,14 @@ let windowsArm64Row branches =
     let tableTemplate =
         "[![][win-arm64-badge-{0}]][win-arm64-version-{0}]<br>[zip][win-arm64-zip-{0}]"
 
+    let tableInstallerTemplate =
+        """[![][win-arm64-badge-{0}]][win-arm64-version-{0}]<br>[Installer][win-arm64-installer-{0}] - [Checksum][win-arm64-installer-checksum-{0}]<br>[zip][win-arm64-zip-{0}]"""
+
     let tableTemplateForThisArch branch =
         match getMajorMinor branch with
         | NoVersion -> notAvailable
-        | MajorMinor { Major = major; Minor = minor } when major <= 3 -> notAvailable
+        | MajorMinor { Major = major; Minor = minor; Release = release; } when major <= 3 -> notAvailable
+        | MajorMinor { Major = major; Minor = minor; Release = release; } when major = 5 && release = "rc2" -> String.Format(tableInstallerTemplate, branchNameShorten branch)
         | _ -> String.Format(tableTemplate, branchNameShorten branch)
     formRow "**Windows arm64**" tableTemplateForThisArch branches
 

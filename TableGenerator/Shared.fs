@@ -17,7 +17,8 @@ let branchNameShorten (branch: Branch): string =
 
 type BranchMajorMinorVersion =
     { Major: int
-      Minor: int }
+      Minor: int
+      Release: string}
 
 type BranchMajorMinorVersionOrMaster =
     | Master
@@ -36,5 +37,6 @@ let getMajorMinor (branch: Branch): BranchMajorMinorVersionOrMaster =
             | true, version ->
                 MajorMinor
                     { Major = version.Major
-                      Minor = version.Minor }
+                      Minor = version.Minor
+                      Release = version.Release}
             | _ -> NoVersion
