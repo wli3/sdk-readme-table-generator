@@ -166,6 +166,30 @@ let ``it can generate windowsArm64``() =
     |> should equal
            "| **Windows arm64** | [![][win-arm64-badge-master]][win-arm64-version-master]<br>[zip][win-arm64-zip-master] | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** | **N/A** |"
 
+let branches2 =
+        [ { GitBranchName = "master"
+            DisplayName = "Master<br>(6.0.x&nbsp;Runtime)"
+            AkaMsChannel = Some("net6/dev") }
+          { GitBranchName = "release/5.0.1xx-rtm"
+            DisplayName = "5.0.100 RTM<br>(5.0 Runtime)"
+            AkaMsChannel = Some("net5/5.0.1xx/daily") }
+          { GitBranchName = "release/3.1.4xx"
+            DisplayName = "Release/3.1.4XX<br>(3.1.x Runtime)"
+            AkaMsChannel = None }]
+
+[<Fact>]
+let ``it can generate linuxMuslRowArm``() =
+    linuxMuslRowArm branches2
+    |> should equal
+           "| **Linux-musl-arm** | [![][linux-musl-arm-badge-master]][linux-musl-arm-version-master]<br>[tar.gz][linux-musl-arm-targz-master] - [Checksum][linux-musl-arm-targz-checksum-master] | **N/A** | **N/A** |"
+
+[<Fact>]
+let ``it can generate linuxMuslRowArm64``() =
+    linuxMuslRowArm64 branches2
+    |> should equal
+           "| **Linux-musl-arm64** | [![][linux-musl-arm64-badge-master]][linux-musl-arm64-version-master]<br>[tar.gz][linux-musl-arm64-targz-master] - [Checksum][linux-musl-arm64-targz-checksum-master] | **N/A** | **N/A** |"
+
+
 [<Fact>]
 let ``it can generate titleRow``() =
     titleRow branches

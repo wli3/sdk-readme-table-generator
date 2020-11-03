@@ -89,16 +89,16 @@ let rhel6ReferenceTemplate: ReferenceTemplate = {
 [rhel-6-targz-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.tar.gz.sha"""
 }
 
-let linuxMuslReferenceTemplate: ReferenceTemplate = {
-    LegacyTemplate = """[linux-musl-badge-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/{3}_Release_version_badge.svg
-[linux-musl-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
-[linux-musl-targz-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.tar.gz
-[linux-musl-targz-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.tar.gz.sha"""
+let linuxMuslX64ReferenceTemplate: ReferenceTemplate = {
+    LegacyTemplate = """[linux-musl-x64-badge-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/{3}_Release_version_badge.svg
+[linux-musl-x64-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
+[linux-musl-x64-targz-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.tar.gz
+[linux-musl-x64-targz-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.tar.gz.sha"""
 
-    AkaMSTemplate = """[linux-musl-badge-{1}]: https://aka.ms/dotnet/{4}/Sdk/{3}_Release_version_badge.svg
-[linux-musl-version-{1}]: https://aka.ms/dotnet/{4}/Sdk/productCommit-{0}.txt
-[linux-musl-targz-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.tar.gz
-[linux-musl-targz-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.tar.gz.sha"""
+    AkaMSTemplate = """[linux-musl-x64-badge-{1}]: https://aka.ms/dotnet/{4}/Sdk/{3}_Release_version_badge.svg
+[linux-musl-x64-version-{1}]: https://aka.ms/dotnet/{4}/Sdk/productCommit-{0}.txt
+[linux-musl-x64-targz-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.tar.gz
+[linux-musl-x64-targz-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.tar.gz.sha"""
 }
 
 let winMuslReferenceTemplate: ReferenceTemplate = {
@@ -142,7 +142,7 @@ let linuxArm64ReferenceTemplate = formatTemplate "linux-arm64" linuxArmNoArchite
 
 let rhel6x64ReferenceTemplate = formatTemplate "rhel.6-x64" rhel6ReferenceTemplate
 
-let linuxMuslx64ReferenceTemplate = formatTemplate "linux-musl-x64" linuxMuslReferenceTemplate
+let linuxMuslx64ReferenceTemplate = formatTemplate "linux-musl-x64" linuxMuslX64ReferenceTemplate
 
 let winArmMuslReferenceTemplate branch =
     match getMajorMinor branch with
