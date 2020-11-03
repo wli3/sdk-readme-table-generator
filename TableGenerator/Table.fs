@@ -59,9 +59,28 @@ let rhel6Row branches =
         | _ -> String.Format(linuxArmTableTemplate, "rhel-6", branchNameShorten branch)
     formRow "**RHEL 6**" tableTemplateForThisArch branches
 
-let linuxMuslRow branches =
-    let tableTemplateForThisArch branch = String.Format(linuxArmTableTemplate, "linux-musl", branchNameShorten branch)
-    formRow "**Linux-musl**" tableTemplateForThisArch branches
+let linuxMuslRowX64 branches =
+    let format branch = String.Format(linuxArmTableTemplate, "linux-musl-x64", branchNameShorten branch)
+    let tableTemplateForThisArch branch = format branch
+    formRow "**Linux-musl-x64**" tableTemplateForThisArch branches
+
+let linuxMuslRowArm branches =
+    let format branch = String.Format(linuxArmTableTemplate, "linux-musl-arm", branchNameShorten branch)
+    let tableTemplateForThisArch branch =
+        match getMajorMinor branch with
+        | Master -> format branch
+        | MajorMinor { Major = major; Minor = _minor } when major >= 6 -> format branch
+        | _ -> notAvailable
+    formRow "**Linux-musl-arm**" tableTemplateForThisArch branches
+
+let linuxMuslRowArm64 branches =
+    let format branch = String.Format(linuxArmTableTemplate, "linux-musl-arm64", branchNameShorten branch)
+    let tableTemplateForThisArch branch =
+        match getMajorMinor branch with
+        | Master -> format branch
+        | MajorMinor { Major = major; Minor = _minor } when major >= 6 -> format branch
+        | _ -> notAvailable
+    formRow "**Linux-musl-arm64**" tableTemplateForThisArch branches
 
 let windowsArmRow branches =
     let tableTemplate =
@@ -86,7 +105,7 @@ let windowsArm64Row branches =
         match getMajorMinor branch with
         | NoVersion -> notAvailable
         | MajorMinor { Major = major; Minor = minor; Release = release; } when major <= 3 -> notAvailable
-        | MajorMinor { Major = major; Minor = minor; Release = release; } when major = 5 && release = "rc2" -> String.Format(tableInstallerTemplate, branchNameShorten branch)
+        | MajorMinor { Major = major; Minor = minor; Release = release; } when major = 5 -> String.Format(tableInstallerTemplate, branchNameShorten branch)
         | _ -> String.Format(tableTemplate, branchNameShorten branch)
     formRow "**Windows arm64**" tableTemplateForThisArch branches
 
@@ -99,13 +118,16 @@ let rows =
       separator
       windowsX64Row
       windowsX86Row
-      osxRow
+      windowsArmRow
+      windowsArm64Row
       linuxDesktopArchRow
       linuxArmRow
       linuxArmX64Row
+      linuxMuslRowX64
+      linuxMuslRowArm
+      linuxMuslRowArm64
       rhel6Row
-      linuxMuslRow
-      windowsArmRow
-      windowsArm64Row ]
+      osxRow
+    ]
 
 let table branches = String.Join(Environment.NewLine, rows |> List.map (fun row -> row branches))
