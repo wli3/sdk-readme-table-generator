@@ -99,13 +99,14 @@ let rows =
       separator
       windowsX64Row
       windowsX86Row
-      osxRow
+      windowsArmRow
+      windowsArm64Row
       linuxDesktopArchRow
       linuxArmRow
       linuxArmX64Row
       rhel6Row
       linuxMuslRow
-      windowsArmRow
-      windowsArm64Row ]
+      osxRow
+    ]
 
 let table branches = String.Join(Environment.NewLine, rows |> List.map (fun row -> row branches))
