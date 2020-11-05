@@ -46,7 +46,7 @@ let linuxArmRow branches =
     let tableTemplateForThisArch branch = String.Format(linuxArmTableTemplate, "linux-arm", branchNameShorten branch)
     formRow "**Linux arm**" tableTemplateForThisArch branches
 
-let linuxArmX64Row branches =
+let linuxArm64Row branches =
     let tableTemplateForThisArch branch = String.Format(linuxArmTableTemplate, "linux-arm64", branchNameShorten branch)
     formRow "**Linux arm64**" tableTemplateForThisArch branches
 
@@ -122,7 +122,7 @@ let rows =
       windowsArm64Row
       linuxDesktopArchRow
       linuxArmRow
-      linuxArmX64Row
+      linuxArm64Row
       linuxMuslRowX64
       linuxMuslRowArm
       linuxMuslRowArm64
