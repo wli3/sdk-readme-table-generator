@@ -11,6 +11,9 @@ let windowsDesktopArchTableTemplate =
 let linuxArmTableTemplate =
     "[![][{0}-badge-{1}]][{0}-version-{1}]<br>[tar.gz][{0}-targz-{1}] - [Checksum][{0}-targz-checksum-{1}]"
 
+let osxDesktopArchTableTemplate =
+    """[![][{0}-badge-{1}]][{0}-version-{1}]<br>[Installer][{0}-installer-{1}] - [Checksum][{0}-installer-checksum-{1}]<br>[tar.gz][{0}-targz-{1}] - [Checksum][{0}-targz-checksum-{1}]"""
+
 let joinListOfArchs (listOfArchs: List<string>): string = "| " + String.Join(" | ", listOfArchs) + " |"
 
 let formRow rowTitle tableTemplateForThisArch branches =
@@ -30,11 +33,18 @@ let windowsX86Row branches =
         String.Format(windowsDesktopArchTableTemplate, "win-x86", branchNameShorten branch)
     formRow "**Windows x86**" tableTemplateForThisArch branches
 
-let osxRow branches =
-    let osxDesktopArchTableTemplate =
-        """[![][osx-badge-{0}]][osx-version-{0}]<br>[Installer][osx-installer-{0}] - [Checksum][osx-installer-checksum-{0}]<br>[tar.gz][osx-targz-{0}] - [Checksum][osx-targz-checksum-{0}]"""
-    let tableTemplateForThisArch branch = String.Format(osxDesktopArchTableTemplate, branchNameShorten branch)
-    formRow "**macOS**" tableTemplateForThisArch branches
+let osxX64Row branches =
+    let tableTemplateForThisArch branch = String.Format(osxDesktopArchTableTemplate, "osx-x64", branchNameShorten branch)
+    formRow "**macOS x64**" tableTemplateForThisArch branches
+
+let osxArm64Row branches =
+    let format branch = String.Format(osxDesktopArchTableTemplate, "osx-arm64", branchNameShorten branch)
+    let tableTemplateForThisArch branch =
+        match getMajorMinor branch with
+        | Master -> format branch
+        | MajorMinor { Major = major; Minor = _minor } when major >= 6 -> format branch
+        | _ -> notAvailable
+    formRow "**macOS arm64**" tableTemplateForThisArch branches
 
 let linuxDesktopArchRow branches =
     let tableTemplate =
@@ -46,7 +56,7 @@ let linuxArmRow branches =
     let tableTemplateForThisArch branch = String.Format(linuxArmTableTemplate, "linux-arm", branchNameShorten branch)
     formRow "**Linux arm**" tableTemplateForThisArch branches
 
-let linuxArmX64Row branches =
+let linuxArm64Row branches =
     let tableTemplateForThisArch branch = String.Format(linuxArmTableTemplate, "linux-arm64", branchNameShorten branch)
     formRow "**Linux arm64**" tableTemplateForThisArch branches
 
@@ -122,12 +132,13 @@ let rows =
       windowsArm64Row
       linuxDesktopArchRow
       linuxArmRow
-      linuxArmX64Row
+      linuxArm64Row
       linuxMuslRowX64
       linuxMuslRowArm
       linuxMuslRowArm64
       rhel6Row
-      osxRow
+      osxX64Row
+      osxArm64Row
     ]
 
 let table branches = String.Join(Environment.NewLine, rows |> List.map (fun row -> row branches))

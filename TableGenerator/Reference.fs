@@ -42,19 +42,19 @@ let linuxArmNoArchitectureReferenceTemplate: ReferenceTemplate = {
 [{0}-targz-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.tar.gz.sha""" }
 
 let osxReferenceTemplate: ReferenceTemplate = {
-    LegacyTemplate = """[osx-badge-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/{3}_Release_version_badge.svg
-[osx-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
-[osx-installer-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.pkg
-[osx-installer-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.pkg.sha
-[osx-targz-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.tar.gz
-[osx-targz-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.tar.gz.sha"""
+    LegacyTemplate = """[{0}-badge-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/{3}_Release_version_badge.svg
+[{0}-version-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/latest.version
+[{0}-installer-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.pkg
+[{0}-installer-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.pkg.sha
+[{0}-targz-{1}]: https://dotnetcli.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.tar.gz
+[{0}-targz-checksum-{1}]: https://dotnetclichecksums.blob.core.windows.net/dotnet/Sdk/{2}/dotnet-sdk-latest-{0}.tar.gz.sha"""
 
-    AkaMSTemplate = """[osx-badge-{1}]: https://aka.ms/dotnet/{4}/Sdk/{3}_Release_version_badge.svg
-[osx-version-{1}]: https://aka.ms/dotnet/{4}/Sdk/productCommit-{0}.txt
-[osx-installer-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.pkg
-[osx-installer-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.pkg.sha
-[osx-targz-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.tar.gz
-[osx-targz-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.pkg.tar.gz.sha"""
+    AkaMSTemplate = """[{0}-badge-{1}]: https://aka.ms/dotnet/{4}/Sdk/{3}_Release_version_badge.svg
+[{0}-version-{1}]: https://aka.ms/dotnet/{4}/Sdk/productCommit-{0}.txt
+[{0}-installer-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.pkg
+[{0}-installer-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.pkg.sha
+[{0}-targz-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.tar.gz
+[{0}-targz-checksum-{1}]: https://aka.ms/dotnet/{4}/Sdk/dotnet-sdk-{0}.pkg.tar.gz.sha"""
 }
 
 let linuxReferenceTemplate: ReferenceTemplate = {
@@ -134,6 +134,13 @@ let winX86ReferenceTemplate = formatTemplate "win-x86" referenceTemplate
 
 let osxX64ReferenceTemplate = formatTemplate "osx-x64" osxReferenceTemplate
 
+let osxArm64ReferenceTemplate branch =
+    let format branch = formatTemplate "osx-arm64" osxReferenceTemplate branch
+    match getMajorMinor branch with
+        | Master -> format branch
+        | MajorMinor { Major = major; Minor = _minor } when major >= 6 -> format branch
+        | _ -> None
+
 let linuxX64ReferenceTemplate = formatTemplate "linux-x64" linuxReferenceTemplate
 
 let linuxArmReferenceTemplate = formatTemplate "linux-arm" linuxArmNoArchitectureReferenceTemplate
@@ -174,6 +181,7 @@ let templates =
     [ winX64ReferenceTemplate
       winX86ReferenceTemplate
       osxX64ReferenceTemplate
+      osxArm64ReferenceTemplate
       linuxX64ReferenceTemplate
       linuxArmReferenceTemplate
       linuxArm64ReferenceTemplate
